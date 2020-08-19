@@ -1,7 +1,13 @@
 <template>
   <div>
     <h1>Usuarios</h1>
-    <UserList :users="users" />
+    <UserList
+      :users="users"
+      @add-user="addUser"
+      @update-user="updateUser"
+      @delete-user="deleteUser"
+      @get-users="getUsers"
+    />
   </div>
 </template>
 
@@ -36,19 +42,29 @@ export default {
       }
     },
     async addUser(user) {
-      this.isLoading = true;
-      await userService.addUser(user);
-      await this.getUsers();
+      try {
+        await userService.addUser(user);
+        await this.getUsers();
+      } catch (err) {
+        console.log(err);
+      }
     },
     async updateUser(user, id) {
-      this.isLoading = true;
-      await userService.addUser(user, { id });
-      await this.getUsers();
+      try {
+        delete user._id;
+        await userService.updateUser(user, id);
+        await this.getUsers();
+      } catch (err) {
+        console.log("Error al actualizar el usuario");
+      }
     },
     async deleteUser(id) {
-      this.isLoading = true;
-      await userService.addUser({ id });
-      await this.getUsers();
+      try {
+        await userService.deleteUser(id);
+        await this.getUsers();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };

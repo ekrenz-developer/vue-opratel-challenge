@@ -1,21 +1,22 @@
-import apiCall from "./config";
+import axios from "axios";
 
 const userService = {};
 
 userService.getUsers = function() {
-  return apiCall("/all", null, null, null, "GET");
+  return axios.get("/all");
 };
 
 userService.addUser = function(data) {
-  return apiCall("/add", data, null, null, "POST");
+  return axios.post("/add", data);
 };
 
-userService.updateUser = function(data, params) {
-  return apiCall(`/update`, data, null, params, "PUT");
+// No funciona correctamente el endpoint en la API
+userService.updateUser = function(data, id) {
+  return axios.post(`/update/${id}`, data);
 };
 
-userService.deleteUser = function(params) {
-  return apiCall("/delete", null, null, params, "DELETE");
+userService.deleteUser = function(id) {
+  return axios.get(`/delete/${id}`);
 };
 
 export default userService;
