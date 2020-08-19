@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import Router from "vue-router";
 import Users from "@/views/Users";
 
 const routes = [
@@ -14,9 +14,7 @@ const routes = [
   }
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+export default new Router({
+  mode: "history",
   routes
 });
-
-export default router;
