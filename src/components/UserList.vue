@@ -10,7 +10,8 @@
     <button type="button" @click="getUsers" class="btn btn-info mb-3">
       Actualizar tabla
     </button>
-    <div class="responsive-table">
+    <spinner :loading="loading" />
+    <div class="responsive-table" v-if="!loading">
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -24,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <UserRow
+          <user-row
             v-for="(user, index) in users"
             :key="user._id"
             :position="index + 1"
@@ -33,7 +34,7 @@
             @update-user="updateUser"
             @delete-user="deleteUser"
           />
-          <UserRow
+          <user-row
             v-if="addNewUser"
             :position="users.length + 1"
             :user="user"
@@ -49,11 +50,13 @@
 
 <script>
 import UserRow from "@/components/UserRow";
+import Spinner from "@/components/Spinner";
 
 export default {
   name: "UserList",
   components: {
-    UserRow
+    UserRow,
+    Spinner
   },
   data() {
     return {
@@ -70,6 +73,9 @@ export default {
     users: {
       type: Array,
       default: () => []
+    },
+    loading: {
+      type: Boolean
     }
   },
   methods: {

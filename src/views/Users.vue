@@ -2,6 +2,7 @@
   <div>
     <UserList
       :users="users"
+      :loading="isLoading"
       @add-user="addUser"
       @update-user="updateUser"
       @delete-user="deleteUser"
