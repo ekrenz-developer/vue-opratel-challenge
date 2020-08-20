@@ -2,45 +2,85 @@
   <tr>
     <th scope="row">{{ position }}</th>
     <td v-if="canEdit">
-      <input type="text" placeholder="Nombre" v-model="userToUpdate.name" key="name-input">
+      <input
+        type="text"
+        placeholder="Nombre"
+        v-model="userToUpdate.name"
+        key="name-input"
+      />
     </td>
     <td v-else>
       {{ user.name }}
     </td>
 
     <td v-if="canEdit">
-      <input type="text" placeholder="Apellido" v-model="userToUpdate.lastname" key="lastname-input">
+      <input
+        type="text"
+        placeholder="Apellido"
+        v-model="userToUpdate.lastname"
+        key="lastname-input"
+      />
     </td>
     <td v-else>
       {{ user.lastname }}
     </td>
 
     <td v-if="canEdit">
-      <input type="text" placeholder="Email" v-model="userToUpdate.email" key="email-input">
+      <input
+        type="text"
+        placeholder="Email"
+        v-model="userToUpdate.email"
+        key="email-input"
+      />
     </td>
     <td v-else>
       {{ user.email }}
     </td>
-    
+
     <td v-if="canEdit">
-      <input type="text" placeholder="Teléfono" v-model="userToUpdate.phone" key="phone-input">
+      <input
+        type="text"
+        placeholder="Teléfono"
+        v-model="userToUpdate.phone"
+        key="phone-input"
+      />
     </td>
     <td v-else>
       {{ user.phone }}
     </td>
 
     <td v-if="!canEdit">
-      <button @click="editUser">Editar</button>
+      <font-awesome-icon
+        class="button-icon"
+        @click="editUser"
+        icon="edit"
+        title="Editar"
+      />
     </td>
     <td v-else>
-      <button @click="saveChanges">Guardar</button>
+      <font-awesome-icon
+        class="button-icon"
+        @click="saveChanges"
+        icon="check"
+        title="Guardar"
+      />
     </td>
 
     <td v-if="!canEdit">
-      <button @click="deleteUser">Eliminar</button>
+      <font-awesome-icon
+        class="button-icon"
+        @click="deleteUser"
+        icon="trash-alt"
+        title="Eliminar"
+      />
     </td>
     <td v-else>
-      <button @click="cancel">Cancelar</button>
+      <font-awesome-icon
+        class="button-icon"
+        @click="cancel"
+        icon="times"
+        title="Cancelar"
+      />
     </td>
   </tr>
 </template>
@@ -90,3 +130,10 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.button-icon:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+</style>

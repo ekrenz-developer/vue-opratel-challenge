@@ -1,8 +1,16 @@
 <template>
   <div>
-    <button type="button" @click="handleAddUser">Agregar usuario</button>
-    <button type="button" @click="getUsers">Actualizar tabla</button>
-    <div class="responsive">
+    <button
+      type="button"
+      @click="addNewUser = true"
+      class="btn btn-primary mb-3 mr-3"
+    >
+      Agregar usuario
+    </button>
+    <button type="button" @click="getUsers" class="btn btn-info mb-3">
+      Actualizar tabla
+    </button>
+    <div class="responsive-table">
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -56,7 +64,7 @@ export default {
         email: null,
         phone: null
       }
-    }
+    };
   },
   props: {
     users: {
@@ -84,3 +92,11 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.responsive-table {
+  overflow-x: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+</style>

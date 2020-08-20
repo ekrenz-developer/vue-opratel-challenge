@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Usuarios</h1>
     <UserList
       :users="users"
       @add-user="addUser"
