@@ -6,11 +6,11 @@
       <div class="pt-5 img-container">
         <img class="img-circle" :src="user.photo" />
         <div class="favorite-icon" v-if="user.favorite">
-          <FavoriteIcon />
+          <favorite-icon />
         </div>
       </div>
       <span class="name">{{ user.name }}</span>
-      <UserBirthdayDate
+      <user-birthday-date
         :highlight="user.highlight"
         :date="user.date"
         :proximityMsg="user.proximityMsg"

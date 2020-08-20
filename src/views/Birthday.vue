@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row responsiveSpacing">
       <div class="col-md-6 col-sm-12" v-for="user in users" :key="user.id">
-        <UserBirthdayCard :user="user" />
+        <user-birthday-card :user="user" />
       </div>
     </div>
   </div>
