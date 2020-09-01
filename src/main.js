@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Router from "vue-router";
+import store from "./store/index";
 import BootstrapVue from "bootstrap-vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -25,6 +26,7 @@ Vue.use(Router);
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-  router
+  store,
+  router,
+  render: h => h(App)
 }).$mount("#app");

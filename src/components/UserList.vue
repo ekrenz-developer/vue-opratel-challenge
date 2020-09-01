@@ -10,23 +10,30 @@
     <button type="button" @click="getUsers" class="btn btn-info mb-3">
       Actualizar tabla
     </button>
+    <div v-if="!loading" class="search-container">
+      <b-form-input
+        placeholder="Buscar usuario"
+        @change="filterUsers"
+        v-model="search"
+      ></b-form-input>
+    </div>
     <spinner :loading="loading" />
     <div class="responsive-table" v-if="!loading">
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Mail</th>
-            <th scope="col">Teléfono</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <user-row
-            v-for="(user, index) in users"
+            v-for="(user, index) in filteredUsers"
             :key="user._id"
             :position="index + 1"
             :user="user"
@@ -36,7 +43,7 @@
           />
           <user-row
             v-if="addNewUser"
-            :position="users.length + 1"
+            :position="filteredUsers.length + 1"
             :user="user"
             :edit="true"
             @add-user="addUser"
@@ -66,7 +73,8 @@ export default {
         lastname: null,
         email: null,
         phone: null
-      }
+      },
+      search: ""
     };
   },
   props: {
@@ -78,11 +86,21 @@ export default {
       type: Boolean
     }
   },
+  computed: {
+    filteredUsers() {
+      return this.users.filter(user => {
+        return (
+          user.username.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+        );
+      });
+    }
+  },
   methods: {
-    updateUser(user, id) {
-      this.$emit("update-user", user, id);
+    updateUser(user) {
+      this.$emit("update-user", user);
     },
     getUsers() {
+      this.search = "";
       this.$emit("get-users");
     },
     addUser(user) {
@@ -104,5 +122,10 @@ export default {
   overflow-x: auto;
   padding-left: 10px;
   padding-right: 10px;
+}
+.search-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 </style>

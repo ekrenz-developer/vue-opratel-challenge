@@ -4,6 +4,18 @@
     <td v-if="canEdit">
       <input
         type="text"
+        placeholder="Usuario"
+        v-model="userToUpdate.username"
+        key="username-input"
+      />
+    </td>
+    <td v-else>
+      {{ user.username }}
+    </td>
+
+    <td v-if="canEdit">
+      <input
+        type="text"
         placeholder="Nombre"
         v-model="userToUpdate.name"
         key="name-input"
@@ -35,18 +47,6 @@
     </td>
     <td v-else>
       {{ user.email }}
-    </td>
-
-    <td v-if="canEdit">
-      <input
-        type="text"
-        placeholder="Teléfono"
-        v-model="userToUpdate.phone"
-        key="phone-input"
-      />
-    </td>
-    <td v-else>
-      {{ user.phone }}
     </td>
 
     <td v-if="!canEdit">
@@ -121,7 +121,7 @@ export default {
       if (this.edit) {
         this.$emit("add-user", this.userToUpdate);
       } else {
-        this.$emit("update-user", this.userToUpdate, this.user._id);
+        this.$emit("update-user", this.userToUpdate);
       }
     },
     deleteUser() {
